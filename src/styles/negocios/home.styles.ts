@@ -1,0 +1,126 @@
+import { StyleSheet } from "react-native";
+
+export const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#F7F8F2",
+  },
+  content: {
+    flex: 1,
+    width: "100%",
+    maxWidth: 520,
+    alignSelf: "center",
+    paddingHorizontal: 24,
+    paddingTop: 12,
+    paddingBottom: 20,
+  },
+  backButton: {
+    alignSelf: "flex-start",
+    paddingVertical: 10,
+    paddingHorizontal: 4,
+  },
+  backText: {
+    color: "#355443",
+    fontSize: 15,
+    fontWeight: "600",
+  },
+  hero: {
+    alignItems: "center",
+    marginTop: 34,
+    marginBottom: 32,
+  },
+  logo: {
+    width: 68,
+    height: 68,
+    borderRadius: 22,
+    backgroundColor: "#173B2B",
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 16,
+  },
+  logoIcon: {
+    color: "#D1E8B5",
+    fontSize: 42,
+    fontWeight: "700",
+  },
+  brand: {
+    color: "#173B2B",
+    fontSize: 27,
+    fontWeight: "800",
+    letterSpacing: -0.7,
+  },
+  tagline: {
+    color: "#6B796D",
+    fontSize: 15,
+    marginTop: 8,
+  },
+  card: {
+    backgroundColor: "#FFFFFF",
+    borderRadius: 24,
+    padding: 24,
+    borderWidth: 1,
+    borderColor: "#E7EAE1",
+  },
+  title: {
+    color: "#1D3225",
+    fontSize: 24,
+    fontWeight: "800",
+    lineHeight: 31,
+  },
+  description: {
+    color: "#68756A",
+    fontSize: 15,
+    lineHeight: 23,
+    marginTop: 12,
+    marginBottom: 26,
+  },
+  primaryButton: {
+    minHeight: 54,
+    borderRadius: 14,
+    backgroundColor: "#173B2B",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: 16,
+  },
+  primaryButtonText: {
+    color: "#FFFFFF",
+    fontSize: 16,
+    fontWeight: "700",
+  },
+  secondaryButton: {
+    minHeight: 54,
+    borderRadius: 14,
+    borderWidth: 1,
+    borderColor: "#C8D5C7",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: 16,
+    marginTop: 12,
+  },
+  secondaryButtonText: {
+    color: "#244C34",
+    fontSize: 15,
+    fontWeight: "700",
+  },
+  pressed: {
+    opacity: 0.8,
+  },
+  helper: {
+    color: "#7A847B",
+    fontSize: 12,
+    lineHeight: 18,
+    textAlign: "center",
+    marginTop: 20,
+  },
+  footer: {
+    marginTop: "auto",
+    paddingTop: 28,
+    alignItems: "center",
+  },
+  footerText: {
+    color: "#899287",
+    fontSize: 10,
+    fontWeight: "700",
+    letterSpacing: 1.2,
+  },
+});

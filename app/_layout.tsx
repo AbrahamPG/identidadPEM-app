@@ -1,30 +1,36 @@
-import { useFonts } from 'expo-font';
-import { DarkTheme, DefaultTheme, Stack, ThemeProvider } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { useEffect } from 'react';
-import 'react-native-reanimated';
+import { useFonts } from "expo-font";
+import {
+  DarkTheme,
+  DefaultTheme,
+  ThemeProvider as NavigationThemeProvider,
+  Stack,
+} from "expo-router";
+import * as SplashScreen from "expo-splash-screen";
+import { useEffect } from "react";
+import "react-native-reanimated";
 
-import { useColorScheme } from '@/components/useColorScheme';
+import Colors from "@/constants/Colors";
+import { FavoritesProvider } from "@/contexts/FavoritesContext";
+import {
+  ThemeProvider as AppThemeProvider,
+  useAppTheme,
+} from "@/contexts/ThemeContext";
+import { PlanProvider } from "@/contexts/plan-context";
+import { ProductsProvider } from "@/contexts/products-context";
 
-export {
-  // Catch any errors thrown by the Layout component.
-  ErrorBoundary,
-} from 'expo-router';
+export { ErrorBoundary } from "expo-router";
 
 export const unstable_settings = {
-  // Ensure that reloading on `/modal` keeps a back button present.
-  initialRouteName: '(tabs)',
+  initialRouteName: "index",
 };
 
-// Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const [loaded, error] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
+    SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
   });
 
-  // Expo Router uses Error Boundaries to catch errors in the navigation tree.
   useEffect(() => {
     if (error) throw error;
   }, [error]);
@@ -39,18 +45,113 @@ export default function RootLayout() {
     return null;
   }
 
-  return <RootLayoutNav />;
+  return (
+    <AppThemeProvider>
+      <RootLayoutNav />
+    </AppThemeProvider>
+  );
 }
 
 function RootLayoutNav() {
-  const colorScheme = useColorScheme();
+  const { theme } = useAppTheme();
+  const isDark = theme === "dark";
+
+  const baseTheme = isDark ? DarkTheme : DefaultTheme;
+  const appColors = Colors[theme];
+
+  const navigationTheme = {
+    ...baseTheme,
+    dark: isDark,
+    colors: {
+      ...baseTheme.colors,
+      primary: appColors.tint,
+      background: appColors.background,
+      card: appColors.background,
+      text: appColors.text,
+      border: isDark ? "#294535" : "#E2E6DD",
+      notification: appColors.tint,
+    },
+  };
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
-      </Stack>
-    </ThemeProvider>
+    <PlanProvider>
+      <ProductsProvider>
+        <FavoritesProvider>
+          <NavigationThemeProvider value={navigationTheme}>
+            <Stack>
+              <Stack.Screen name="index" options={{ headerShown: false }} />
+              <Stack.Screen
+                name="identidadPEM/onboarding"
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="identidadPEM/(tabs)"
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="business/[id]"
+                options={{ headerShown: false }}
+              />
+
+              <Stack.Screen
+                name="negocios/index"
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="negocios/login"
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="negocios/register"
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="negocios/(tabs)"
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="negocios/sin-negocio"
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="negocios/crear"
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="negocios/invitaciones"
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="negocios/configurar"
+                options={{ headerShown: false }}
+              />
+
+              <Stack.Screen
+                name="negocios/organizaciones"
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="negocios/mesero"
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="negocios/cocina"
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="negocios/recepcion"
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="negocios/limpieza"
+                options={{ headerShown: false }}
+              />
+
+              <Stack.Screen name="modal" options={{ presentation: "modal" }} />
+            </Stack>
+          </NavigationThemeProvider>
+        </FavoritesProvider>
+      </ProductsProvider>
+    </PlanProvider>
   );
 }
